@@ -30,3 +30,18 @@ code {
   color:black;
   font-weight:600;
 }
+
+.no-border-outline, .no-border-outline:focus{
+  border:none;
+  outline:none;
+  background: transparent;
+}
+
+.news-feed{
+  color:black;
+  font-weight:500;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
