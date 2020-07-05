@@ -12,7 +12,8 @@ class App extends Component {
     super(props);
     this.state = { 
       apiResponse: "",
-      newsFeed:"" 
+      newsFeed:"",
+      page:"" 
     };
   }
 
@@ -22,20 +23,24 @@ class App extends Component {
         .then((data) => {
             console.log(data);
             this.setState({ apiResponse: data,
-              newsFeed:data.hits })
+              newsFeed:data.hits,
+              page:pgNum })
         })
   }
 
   previous(){
-    
+    this.props.history.goBack();
+    this.callAPI(Number(this.props.match.params.id)-1)
   }
 
   next(){
-    
+    const nextPage = Number(this.props.match.params.id)+1;
+    this.props.history.push(nextPage+'')
+    this.callAPI(nextPage)
   }
 
   componentDidMount() {
-    this.callAPI("0");
+    this.callAPI(this.props.match.params.id);
   }
 
   getDate(date){
@@ -127,8 +132,8 @@ class App extends Component {
                 {this.renderTableData()}
               </tbody>
             </table>
-            <button className ="no-border-outline cursor-pointer" onClick={this.previous.bind(this)}>Previous</button>
-            <button className ="no-border-outline cursor-pointer" onClick={this.next.bind(this)}>Next</button>
+            <button className ="no-border-outline cursor-pointer" onClick={this.previous.bind(this)} style = {this.state.page == 0  ? {display:"none"} : undefined}>Previous</button>
+            <button className ="no-border-outline cursor-pointer" onClick={this.next.bind(this)} style = {this.state.page == this.state.apiResponse.nbPages-1 ? {display:"none"} : undefined}>Next</button>
           </div>
         ) 
   }
