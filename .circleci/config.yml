@@ -27,4 +27,4 @@ workflows:
         - build-and-test
         - deploy:
            requires:
-             - build # only run deploy-via-git job if the build job has completed
+             - build-and-test # only run deploy-via-git job if the build job has completed
