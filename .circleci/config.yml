@@ -11,7 +11,20 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
+  deploy:
+     docker:
+       - image: docker-image-hackernews-v1
+     steps:
+       - checkout
+       - run:
+           name: Deploy Master to Heroku
+           command: |
+             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+
 workflows:
     build-and-test:
       jobs:
         - build-and-test
+        - deploy:
+           requires:
+             - build # only run deploy-via-git job if the build job has completed
