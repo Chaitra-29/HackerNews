@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {Chart} from 'react-google-charts';
 
 const options = {
-    legend: 'none',
+    legend:'none',
     chartArea: {width: '50%',height: '100%'},
     hAxis: {title: 'IDs'},
     vAxis: {title: 'Votes'}
@@ -29,12 +29,11 @@ class LineChart extends Component {
       renderTableData() {
         if(this.state.ids && this.state.votes){
             let dataset = [];
-            dataset.push(['x', 'y'])
-            this.state.ids.forEach((id) =>{
-               this.state.votes.forEach((vote) => {
-                dataset.push([id,vote])
-              })
-          })
+            dataset.push(['IDs', 'Votes'])
+            for(let i= 0; i < this.state.ids.length; i++){
+                dataset.push([this.state.ids[i], this.state.votes[i]]);
+            }
+          console.log(dataset)
           return dataset
         }
 
@@ -44,6 +43,7 @@ class LineChart extends Component {
       render() {
         return (
             <Chart chartType='LineChart' data={this.renderTableData()} options={options} rootProps={{'data-testid': '1'}} />
+            
         );
       }
 }

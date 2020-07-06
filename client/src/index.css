@@ -60,6 +60,7 @@ code {
 
 .navigate-buttons{
   font-weight:500;
+  padding:1rem
 }
 
 .navigate-buttons:active{
