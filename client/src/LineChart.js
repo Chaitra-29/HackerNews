@@ -41,10 +41,11 @@ class LineChart extends Component {
       }
 
       render() {
-        return (
-            <Chart chartType='LineChart' data={this.renderTableData()} options={options} rootProps={{'data-testid': '1'}} />
-            
-        );
+        if(this.state.ids && this.state.votes){
+            return <Chart chartType='LineChart' data={this.renderTableData()} options={options} rootProps={{'data-testid': '1'}} />
+        }else{
+            return <div />
+        }
       }
 }
 export default LineChart;

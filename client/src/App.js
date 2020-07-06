@@ -138,16 +138,16 @@ class App extends Component {
                   <th style={{width:'10%'}}>Comments</th>
                   <th style={{width:'15%'}}>Vote Counts</th>
                   <th style={{width:'10%'}}>UpVote</th>
-                  <th style={{width:'75%'}}>NewsDetail</th>
+                  <th style={{width:'75%'}}>News Details</th>
                 </tr>
               </thead>
               <tbody>
                 {this.renderTableData()}
               </tbody>
             </table>
-            <div>
-              <LineChart ids={this.ids} votes={this.votes} ></LineChart>
-            </div>
+              <div>
+                <LineChart ids={this.ids} votes={this.votes} ></LineChart>
+              </div>
             <div className="float-right">
               <button className ="no-border-outline cursor-pointer color-orange navigate-buttons" onClick={this.previous.bind(this)} style = {Number(this.state.page) === 0  ? {display:"none"} : undefined}>Previous</button>
               <span className="color-orange" style = {Number(this.state.page) === 0 || Number(this.state.page) === this.state.apiResponse.nbPages-1 ? {display:"none"} : undefined}>|</span>
