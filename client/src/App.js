@@ -1,10 +1,6 @@
 import React, { Component,createRef } from "react";
 import "./index.css";
 import moment from 'moment';
-// import { BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Link } from "react-router-dom";
 
 class App extends Component {
   tr = createRef();
@@ -21,12 +17,27 @@ class App extends Component {
     fetch("http://hn.algolia.com/api/v1/search_by_date?tags=front_page&page="+ pgNum)
         .then(response => response.json())
         .then((data) => {
+          let upvotes = this.getLocalStorage("upvotes");
+          let hidefeeds = this.getLocalStorage("hidefeeds");
+          hidefeeds.forEach((feed) => {
+            if(this.props.match.params.id === feed.pageId) {
+              data.hits.splice(feed.index,1);
+            }
+          });
+          upvotes.forEach((feed) => {
+            if(this.props.match.params.id === feed.pageId) {
+              data.hits[feed.index].points = feed.points;
+            }
+          });
+
+
             console.log(data);
             this.setState({ apiResponse: data,
               newsFeed:data.hits,
               page:pgNum })
         })
   }
+  
 
   previous(){
     this.props.history.goBack();
@@ -49,7 +60,8 @@ class App extends Component {
 
   hideNews(event){
     let hide = {
-      index:event.target.id
+      index:event.target.id,
+      pageId:this.props.match.params.id,
     }
     let hidefeeds = this.getLocalStorage("hidefeeds");
     hidefeeds.push(hide)
@@ -70,7 +82,7 @@ class App extends Component {
     const selectedIndex = event.target.id;
     let upvotes = this.getLocalStorage("upvotes");
     let isPresent = upvotes.findIndex((feed)=>{
-      return selectedIndex === feed.index
+      return selectedIndex === feed.index && this.props.match.params.id === feed.pageId
     });
     console.log(this.state.newsFeed[selectedIndex])
     if(isPresent === -1){
@@ -80,10 +92,11 @@ class App extends Component {
         feed.points++;
         let upvote = {
           index:selectedIndex,
+          pageId:this.props.match.params.id,
           points:feed.points
         }
         upvotes.push(upvote);
-        this.setLocalStorage("upvotes",upvotes)
+        this.setLocalStorage("upvotes",upvotes);
         this.setState({newsFeed:this.state.newsFeed}); 
       }
     }
@@ -132,8 +145,8 @@ class App extends Component {
                 {this.renderTableData()}
               </tbody>
             </table>
-            <button className ="no-border-outline cursor-pointer" onClick={this.previous.bind(this)} style = {this.state.page == 0  ? {display:"none"} : undefined}>Previous</button>
-            <button className ="no-border-outline cursor-pointer" onClick={this.next.bind(this)} style = {this.state.page == this.state.apiResponse.nbPages-1 ? {display:"none"} : undefined}>Next</button>
+            <button className ="no-border-outline cursor-pointer" onClick={this.previous.bind(this)} style = {this.state.page === 0  ? {display:"none"} : undefined}>Previous</button>
+            <button className ="no-border-outline cursor-pointer" onClick={this.next.bind(this)} style = {this.state.page === this.state.apiResponse.nbPages-1 ? {display:"none"} : undefined}>Next</button>
           </div>
         ) 
   }
