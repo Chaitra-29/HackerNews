@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <script>
-        localStorage.setItem("upvotes",JSON.stringify([]));
-        localStorage.setItem("hidefeeds",JSON.stringify([]));
+        if(!localStorage.getItem("upvotes"))  localStorage.setItem("upvotes",JSON.stringify([]));
+        if(!localStorage.getItem("hidefeeds")) localStorage.setItem("hidefeeds",JSON.stringify([]));
     </script>
     <!--
       manifest.json provides metadata used when your web app is installed on a

@@ -1,20 +1,19 @@
-import React, { Component,createRef } from "react";
+import React, { Component } from "react";
 import "./index.css";
 import moment from 'moment';
-
+import LineChart from "./LineChart";
 class App extends Component {
-  tr = createRef();
   constructor(props) {
     super(props);
     this.state = { 
       apiResponse: "",
       newsFeed:"",
-      page:"" 
+      page:""
     };
   }
 
   callAPI(pgNum) {
-    fetch("http://hn.algolia.com/api/v1/search_by_date?tags=front_page&page="+ pgNum)
+    fetch("http://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=10&page="+ pgNum)
         .then(response => response.json())
         .then((data) => {
           let upvotes = this.getLocalStorage("upvotes");
@@ -29,12 +28,10 @@ class App extends Component {
               data.hits[feed.index].points = feed.points;
             }
           });
-
-
-            console.log(data);
-            this.setState({ apiResponse: data,
-              newsFeed:data.hits,
-              page:pgNum })
+          this.setState({ apiResponse: data,
+            newsFeed:data.hits,
+            page:pgNum 
+          })
         })
   }
   
@@ -105,15 +102,18 @@ class App extends Component {
 
   renderTableData() {
     if(this.state.apiResponse){
+      this.votes=[];
+      this.ids=[];
         return this.state.newsFeed.map((feed,index)=>{
-          return <tr key={index} ref={this.tr}>
+          this.votes.push(feed.points);
+          this.ids.push(feed.objectID);
+          return <tr key={index}>
             <td className="text-center">{feed.num_comments}</td>
             <td className="text-center">{feed.points}</td>
-            <td className="text-center"><button className  ="no-border-outline cursor-pointer" id={index}  onClick={this.upVote.bind(this)}>
+            <td className="text-center cursor-pointer " onClick={this.upVote.bind(this)} id={index} >
               <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-triangle-fill arrow-color" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z"/>
               </svg>
-            </button>
             </td>
             <td >
               <a className="news-feed" href={feed.url}>{feed.story_title || feed.title} </a>
@@ -145,8 +145,14 @@ class App extends Component {
                 {this.renderTableData()}
               </tbody>
             </table>
-            <button className ="no-border-outline cursor-pointer" onClick={this.previous.bind(this)} style = {this.state.page === 0  ? {display:"none"} : undefined}>Previous</button>
-            <button className ="no-border-outline cursor-pointer" onClick={this.next.bind(this)} style = {this.state.page === this.state.apiResponse.nbPages-1 ? {display:"none"} : undefined}>Next</button>
+            <div>
+              <LineChart ids={this.ids} votes={this.votes} ></LineChart>
+            </div>
+            <div className="float-right">
+              <button className ="no-border-outline cursor-pointer color-orange navigate-buttons" onClick={this.previous.bind(this)} style = {Number(this.state.page) === 0  ? {display:"none"} : undefined}>Previous</button>
+              <span className="color-orange" style = {Number(this.state.page) === 0 || Number(this.state.page) === this.state.apiResponse.nbPages-1 ? {display:"none"} : undefined}>|</span>
+              <button className ="no-border-outline cursor-pointer color-orange navigate-buttons" onClick={this.next.bind(this)} style = {Number(this.state.page) === this.state.apiResponse.nbPages-1 ? {display:"none"} : {marginRight:"1rem"}}>Next</button>
+            </div>
           </div>
         ) 
   }

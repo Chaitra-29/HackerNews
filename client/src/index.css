@@ -26,6 +26,10 @@ code {
   font-size:14px;
 }
 
+.button-points:active, .button-points:focus{
+  background: green;
+}
+
 .fontweight-and-color{
   color:black;
   font-weight:600;
@@ -44,4 +48,27 @@ code {
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+.float-right{
+  float:right;
+}
+
+.color-orange{
+  color:#ff742b;
+}
+
+.navigate-buttons{
+  font-weight:500;
+}
+
+.navigate-buttons:active{
+  color:black;
+}
+
+#reactgooglegraph-1{
+  padding:1rem
+}
+#reactgooglegraph-1,#reactgooglegraph-1>*,#reactgooglegraph-1 svg{
+  height:400px;
 }
