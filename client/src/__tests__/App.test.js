@@ -1,13 +1,11 @@
 import React from 'react';
-import App from './App';
+import App from '../App';
 import { render,screen } from "@testing-library/react";
 import { configure,shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
-afterEach(() => {
-  
-});
+
 test('renders column headers', () => {
   render(<App match={{ params: { id: 0 } }}  />);
   const comments = screen.getByText(/Comments/i);

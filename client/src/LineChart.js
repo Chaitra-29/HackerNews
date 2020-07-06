@@ -33,7 +33,6 @@ class LineChart extends Component {
             for(let i= 0; i < this.state.ids.length; i++){
                 dataset.push([this.state.ids[i], this.state.votes[i]]);
             }
-          console.log(dataset)
           return dataset
         }
 

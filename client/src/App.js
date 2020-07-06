@@ -133,7 +133,7 @@ class App extends Component {
         return (
           <div>
             <table className="table table-striped">
-              <thead className="thead-color">
+              <thead className="dark-orange-color">
                 <tr>
                   <th style={{width:'10%'}}>Comments</th>
                   <th style={{width:'15%'}}>Vote Counts</th>
