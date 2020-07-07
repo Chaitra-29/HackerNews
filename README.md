@@ -15,9 +15,9 @@ A. Pre-requisites lib to get started. System must have the below software instal
 
 1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
     ```
-     # Install nvm, node and npm:
-     https://github.com/creationix/nvm#install-script
-         ```
+    # Install nvm, node and npm:
+    https://github.com/creationix/nvm#install-script
+    ```
 2. Install your dependencies for server-side 
 
     ```
