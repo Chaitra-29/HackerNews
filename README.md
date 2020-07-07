@@ -1,9 +1,12 @@
 # HackerNews
-
+Hacker News is a community started by Paul Graham for sharing &quot;Anything that good
+hackers would find interesting. That includes more than hacking and startups. If you
+had to reduce it to a sentence, the answer might be: anything that gratifies one&#39;s
+intellectual curiosity.&quot;
 
 
 ## Frontend : 
-  Developed using React js, Bootstrap for css and Node.js and other nuances of React and html. 
+   Developed using React js, Bootstrap for css and Node.js and other nuances of React and html. 
   
    How to run:
 
@@ -32,5 +35,5 @@ A. Pre-requisites lib to get started. System must have the below software instal
     ```
  4. To Test  
     ```
-    cd path/to/TODO/client; npm run test
+    cd path/to/HackerNews; npm run test
     ```
