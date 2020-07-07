@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   callAPI(pgNum) {
-    fetch("http://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=10&page=" + pgNum)
+    fetch("https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=10&page=" + pgNum)
       .then(response => response.json())
       .then((data) => {
         let upvotes = this.getLocalStorage("upvotes");
