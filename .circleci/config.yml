@@ -12,8 +12,6 @@ jobs:
             - run: npm install
             - run: npm test
   deploy:
-     docker:
-       - image: docker-image-hackernews-v1
      steps:
        - checkout
        - run:
