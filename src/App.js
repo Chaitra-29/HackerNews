@@ -111,9 +111,9 @@ class App extends Component {
         return <tr key={index}>
           <td className="text-center">{feed.num_comments}</td>
           <td className="text-center">{feed.points}</td>
-          <td className="text-center cursor-pointer " onClick={this.upVote.bind(this)} id={index} >
+          <td className="text-center cursor-pointer "onClick={this.upVote.bind(this)} id={index} >
             <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-triangle-fill arrow-color" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z" />
+              <path onClick={this.upVote.bind(this)} id={index} fillRule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z" />
             </svg>
           </td>
           <td >
@@ -136,10 +136,10 @@ class App extends Component {
         <table className="table table-striped">
           <thead className="dark-orange-color">
             <tr>
-              <th style={{ width: '10%' }}>Comments</th>
-              <th style={{ width: '15%' }}>Vote Counts</th>
-              <th style={{ width: '10%' }}>UpVote</th>
-              <th style={{ width: '75%' }}>News Details</th>
+              <th style={{ width: '10%' }} className="text-center">Comments</th>
+              <th style={{ width: '15%' }} className="text-center">Vote Counts</th>
+              <th style={{ width: '10%' }} className="text-center">UpVote</th>
+              <th style={{ width: '75%' }} className="text-center">News Details</th>
             </tr>
           </thead>
           <tbody>
