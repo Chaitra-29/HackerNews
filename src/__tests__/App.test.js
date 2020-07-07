@@ -78,7 +78,7 @@ test('fetch api', () => {
   jest.spyOn(global, 'fetch').mockImplementation(() => mockFetchPromise);
   const wrapper = shallow(<App match={{ params: { id: 0 } }} />);
   expect(global.fetch).toHaveBeenCalledTimes(1);
-  expect(global.fetch).toHaveBeenCalledWith('http://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=10&page=0');
+  expect(global.fetch).toHaveBeenCalledWith('https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=10&page=0');
 });
 
 test('previous and next button', () => {
