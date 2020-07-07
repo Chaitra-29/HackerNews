@@ -1,3 +1,7 @@
+# Example:
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+
+
 # HackerNews
 Hacker News is a community started by Paul Graham for sharing &quot;Anything that good
 hackers would find interesting. That includes more than hacking and startups. If you
