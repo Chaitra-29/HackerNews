@@ -132,7 +132,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="table-responsive">
         <table className="table table-striped">
           <thead className="dark-orange-color">
             <tr>

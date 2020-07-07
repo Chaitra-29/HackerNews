@@ -73,3 +73,8 @@ code {
 #reactgooglegraph-1,#reactgooglegraph-1>*,#reactgooglegraph-1 svg{
   height:400px;
 }
+
+.jumbotron-no-margin{
+  margin-bottom: 0;
+  background-color:transparent;
+}
