@@ -20,7 +20,7 @@
     "eject": "react-scripts eject",
     "start": "serve -s build",
     "build": "react-scripts build",
-    "heroku-postbuild": "npm run build"
+    "heroku-prebuild": "npm i"
   },
   "eslintConfig": {
     "extends": "react-app"
